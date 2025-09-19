@@ -111,7 +111,7 @@ setup_source_database() {
             -e POSTGRES_USER=postgres \
             -e POSTGRES_PASSWORD=postgres \
             -v pagila-source-data:/var/lib/postgresql/data \
-            registry.localhost/datakits/postgres-runner:$IMAGE_VERSION
+            postgres:15.8
     fi
 
     # Wait for database to be ready
@@ -156,7 +156,7 @@ setup_warehouse_database() {
             -e POSTGRES_USER=warehouse \
             -e POSTGRES_PASSWORD=warehouse \
             -v data-warehouse-data:/var/lib/postgresql/data \
-            registry.localhost/datakits/postgres-runner:$IMAGE_VERSION
+            postgres:15.8
     fi
 
     # Wait for database to be ready
@@ -223,7 +223,7 @@ create_development_compose() {
 version: '3.8'
 services:
   pagila-source:
-    image: registry.localhost/datakits/postgres-runner:$IMAGE_VERSION
+    image: postgres:15.8
     container_name: pagila-source
     environment:
       POSTGRES_DB: pagila
@@ -237,7 +237,7 @@ services:
       - data-processing
 
   data-warehouse:
-    image: registry.localhost/datakits/postgres-runner:$IMAGE_VERSION
+    image: postgres:15.8
     container_name: data-warehouse
     environment:
       POSTGRES_DB: data_warehouse
