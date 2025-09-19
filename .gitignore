@@ -42,4 +42,5 @@ venv.bak/
 
 # Local development overrides
 docker-compose.override.yml
+docker-compose.layer2.yml
 .env.local
