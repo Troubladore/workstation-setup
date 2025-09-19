@@ -162,12 +162,38 @@ vim layer2-datakits/bronze-pagila/datakit_bronze/ingest.py
 ```
 
 ### Clean Slate Testing
+
+**Complete Fresh Start** (nuclear option):
 ```bash
-# Complete teardown of data layer (preserves platform)
+# Clean everything including data volumes
 ./scripts/teardown-layer2.sh --full-clean
 
-# Fresh rebuild and test
-./scripts/setup-layer2.sh --rebuild-images
+# Fresh rebuild and deploy
+./scripts/setup-layer2.sh
+```
+
+**Quick Reset** (preserves data volumes):
+```bash
+# Preserve data for faster rebuild
+./scripts/teardown-layer2.sh --preserve-data
+
+# Rebuild and deploy
+./scripts/setup-layer2.sh
+```
+
+**Step-by-Step Control**:
+```bash
+# 1. Clean slate
+./scripts/teardown-layer2.sh --full-clean
+
+# 2. Build static components (images, DBT configs)
+./scripts/build-layer2-components.sh
+
+# 3. Deploy runtime services (databases)
+./scripts/deploy-layer2-runtime.sh
+
+# 4. Validate deployment
+./scripts/validate-data-quality.sh
 ./scripts/run-data-pipeline.sh --full-refresh
 ```
 
@@ -212,6 +238,22 @@ data_quality:
 ```
 
 ## 🚨 Troubleshooting
+
+### Quick Reference Commands
+
+**Teardown Options:**
+```bash
+./scripts/teardown-layer2.sh --help        # Show all options
+./scripts/teardown-layer2.sh --full-clean  # Nuclear: remove everything
+./scripts/teardown-layer2.sh --preserve-data # Quick: keep data volumes
+```
+
+**Build & Deploy:**
+```bash
+./scripts/setup-layer2.sh                  # All-in-one setup
+./scripts/build-layer2-components.sh       # Build images & configs
+./scripts/deploy-layer2-runtime.sh         # Deploy databases & services
+```
 
 ### Common Issues
 
