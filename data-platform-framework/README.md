@@ -1,8 +1,13 @@
-# Layer 2 Datakits Framework
+# Data Platform Framework
 
-**🔧 Reusable framework library for deploying Layer 2 data objects to disposable test targets**
+**🏗️ Comprehensive framework library for data platform infrastructure**
 
-This framework provides the core infrastructure for building and testing individual data objects (datakits) against various database targets. It's designed to be reused by both Layer 2 (component testing) and Layer 3 (pipeline orchestration).
+This framework provides the foundational patterns and utilities for our entire data platform:
+- **Layer 2**: Component testing with data object deployment
+- **Layer 3**: Pipeline orchestration and integration testing
+- **Production**: Deployment patterns for live data systems
+
+Extracted and adapted from medallion-demo patterns for enterprise-scale data platform operations.
 
 ## 🎯 Architecture Philosophy
 
@@ -15,7 +20,7 @@ This framework provides the core infrastructure for building and testing individ
 
 ### Deploy a Datakit to SQLite (Fastest)
 ```bash
-cd layer2-datakits-framework
+cd data-platform-framework
 python scripts/deploy_datakit.py /path/to/bronze-pagila --target sqlite_memory --validate
 ```
 
@@ -42,7 +47,7 @@ python scripts/deploy_datakit.py --list-targets
 ## 🗂️ Framework Structure
 
 ```
-layer2-datakits-framework/
+data-platform-framework/
 ├── engines/                    # Database engine factories
 │   ├── postgres_engine.py     # PostgreSQL connections & containers
 │   ├── mysql_engine.py        # MySQL connections & containers
@@ -205,15 +210,35 @@ def setup_pipeline_environment():
 
 ## 🚨 Framework Requirements
 
+### Quick Installation
 ```bash
-# Core dependencies
-pip install sqlmodel sqlalchemy psycopg2-binary pymysql
+# Install production dependencies
+uv sync --no-dev
 
-# Optional for different engines
-pip install psycopg2-binary  # PostgreSQL
-pip install pymysql          # MySQL
-# SQLite included in Python standard library
+# Or add to existing project
+uv add sqlmodel==0.0.25 sqlalchemy==2.0.43 psycopg2-binary==2.9.10
 ```
+
+### Development Installation
+```bash
+# Install with development dependencies
+uv sync --extra dev --extra testing --extra async
+
+# Complete development setup with pre-commit hooks
+make setup-dev
+```
+
+### Core Dependencies (Latest Versions)
+- **SQLModel 0.0.25** (Sep 2025) - Data modeling and FastAPI integration
+- **psycopg2-binary 2.9.10** (Oct 2024) - PostgreSQL adapter
+- **PyMySQL 1.1.1** - MySQL adapter
+- **SQLAlchemy 2.x** - SQL toolkit (required by SQLModel)
+- **Pydantic 2.x** - Data validation (required by SQLModel)
+
+### Database Support
+- **SQLite**: Built into Python standard library (no additional install)
+- **PostgreSQL**: psycopg2-binary for production, asyncpg for async operations
+- **MySQL**: PyMySQL for synchronous, aiomysql for async operations
 
 ## 🎯 Design Principles
 

@@ -1,5 +1,4 @@
-"""
-Layer 2 Datakits Framework - Data Object Deployment Utilities
+"""Layer 2 Datakits Framework - Data Object Deployment Utilities
 
 Core utilities for deploying data objects to disposable test databases.
 Supports dynamic discovery, multi-database targeting, and validation.
@@ -13,18 +12,18 @@ import sys
 from types import ModuleType
 from typing import Any
 
+from sqlalchemy.engine import Engine
+from sqlmodel import SQLModel
+
 from engines.mysql_engine import create_engine_for_test_target as create_mysql_engine
 from engines.postgres_engine import create_engine_for_test_target as create_postgres_engine
 from engines.sqlite_engine import create_engine_for_test_target as create_sqlite_engine
-from sqlalchemy.engine import Engine
-from sqlmodel import SQLModel
 
 logger = logging.getLogger(__name__)
 
 
 def configure_logging(log_level: str = "INFO"):
-    """
-    Configure logging for the deployment framework.
+    """Configure logging for the deployment framework.
 
     Args:
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
@@ -61,8 +60,7 @@ def configure_logging(log_level: str = "INFO"):
 
 
 def create_engine_for_target(target_config: dict[str, Any]) -> Engine:
-    """
-    Create database engine for specified target configuration.
+    """Create database engine for specified target configuration.
 
     This is the main factory for Layer 2 data object testing.
     Supports multiple database types for unit test configurations.
@@ -99,8 +97,7 @@ def create_engine_for_target(target_config: dict[str, Any]) -> Engine:
 
 
 def discover_datakit_modules(datakit_path: str) -> list[ModuleType]:
-    """
-    Discover Python modules in a datakit directory.
+    """Discover Python modules in a datakit directory.
 
     Args:
         datakit_path: Path to datakit directory
@@ -141,8 +138,7 @@ def discover_datakit_modules(datakit_path: str) -> list[ModuleType]:
 
 
 def discover_sqlmodel_classes(modules: list[ModuleType]) -> list[type[SQLModel]]:
-    """
-    Discover SQLModel table classes from imported modules.
+    """Discover SQLModel table classes from imported modules.
 
     Args:
         modules: List of Python modules to examine
@@ -168,8 +164,7 @@ def discover_sqlmodel_classes(modules: list[ModuleType]) -> list[type[SQLModel]]
 
 
 def _is_table_class(obj) -> bool:
-    """
-    Check if object is a SQLModel table class.
+    """Check if object is a SQLModel table class.
 
     Args:
         obj: Object to check
@@ -188,8 +183,7 @@ def _is_table_class(obj) -> bool:
 def deploy_data_objects(
     table_classes: list[type[SQLModel]], target_config: dict[str, Any], create_database: bool = True
 ) -> dict[str, Any]:
-    """
-    Deploy data objects (tables) to target database.
+    """Deploy data objects (tables) to target database.
 
     This is the core deployment function for Layer 2 unit testing.
     Creates tables in disposable database targets.
@@ -238,8 +232,7 @@ def deploy_data_objects(
 def validate_deployment(
     table_classes: list[type[SQLModel]], target_config: dict[str, Any]
 ) -> dict[str, Any]:
-    """
-    Validate that data objects were deployed successfully.
+    """Validate that data objects were deployed successfully.
 
     Args:
         table_classes: List of table classes that should exist
@@ -285,8 +278,7 @@ def validate_deployment(
 
 
 def cleanup_test_target(target_config: dict[str, Any]) -> dict[str, Any]:
-    """
-    Clean up disposable test database target.
+    """Clean up disposable test database target.
 
     Args:
         target_config: Database target configuration

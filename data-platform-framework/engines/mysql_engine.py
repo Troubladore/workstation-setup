@@ -1,5 +1,4 @@
-"""
-MySQL Engine Factory for Layer 2 Datakits Framework
+"""MySQL Engine Factory for Layer 2 Datakits Framework
 
 Provides disposable MySQL database connections for unit testing data objects.
 Supports containerized MySQL environments for multi-database testing.
@@ -16,8 +15,7 @@ def get_connection_url(
     host: str = "localhost",
     port: int = 3306,
 ) -> str:
-    """
-    Build MySQL connection URL.
+    """Build MySQL connection URL.
 
     Args:
         database_name: Name of the database to connect to
@@ -39,8 +37,7 @@ def get_connection_url(
 def create_engine_for_test_target(
     database_name: str, engine_config: dict, echo: bool = False
 ) -> Engine:
-    """
-    Create SQLAlchemy engine for a MySQL test database target.
+    """Create SQLAlchemy engine for a MySQL test database target.
 
     Args:
         database_name: Name of the test database
@@ -78,8 +75,7 @@ def get_engine(
     host: str = "localhost",
     port: int = 3306,
 ) -> Engine:
-    """
-    Create MySQL engine with direct parameters.
+    """Create MySQL engine with direct parameters.
 
     For Layer 2, prefer using create_engine_for_test_target() with explicit config.
     """

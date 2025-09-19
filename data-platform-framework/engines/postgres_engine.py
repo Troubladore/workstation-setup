@@ -1,5 +1,4 @@
-"""
-PostgreSQL Engine Factory for Layer 2 Datakits Framework
+"""PostgreSQL Engine Factory for Layer 2 Datakits Framework
 
 Provides disposable PostgreSQL database connections for unit testing data objects.
 Supports multiple connection methods and containerized environments.
@@ -22,8 +21,7 @@ def get_connection_url(
     host: str = "localhost",
     port: int = 5432,
 ) -> str:
-    """
-    Build PostgreSQL connection URL for different authentication methods.
+    """Build PostgreSQL connection URL for different authentication methods.
 
     Args:
         database_name: Name of the database to connect to
@@ -54,8 +52,7 @@ def get_connection_url(
 
 
 def find_postgres_socket_dir(port: int = 5432) -> str | None:
-    """
-    Find PostgreSQL unix socket directory.
+    """Find PostgreSQL unix socket directory.
 
     Args:
         port: PostgreSQL port number
@@ -97,8 +94,7 @@ def find_postgres_socket_dir(port: int = 5432) -> str | None:
 def create_engine_for_test_target(
     database_name: str, engine_config: dict, echo: bool = False
 ) -> Engine:
-    """
-    Create SQLAlchemy engine for a test database target.
+    """Create SQLAlchemy engine for a test database target.
 
     This is the main factory function for Layer 2 unit testing.
     Creates disposable database connections for testing data objects.
@@ -157,8 +153,7 @@ def get_engine(
     host: str = "localhost",
     port: int = 5432,
 ) -> Engine:
-    """
-    Legacy interface matching medallion-demo pattern.
+    """Legacy interface matching medallion-demo pattern.
 
     For Layer 2, prefer using create_engine_for_test_target() with explicit config.
     """

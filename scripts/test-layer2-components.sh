@@ -100,7 +100,7 @@ test_data_object_deployment() {
     local test_result
     if test_result=$(python3 -c "
 import sys
-sys.path.insert(0, '$REPO_ROOT/layer2-datakits-framework')
+sys.path.insert(0, '$REPO_ROOT/data-platform-framework')
 
 try:
     from utils.deployment import discover_datakit_modules, discover_sqlmodel_classes, deploy_data_objects

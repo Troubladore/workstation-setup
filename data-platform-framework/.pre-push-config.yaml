@@ -1,0 +1,74 @@
+# Data Platform Framework - Pre-push Configuration
+# Comprehensive testing and validation before pushing code
+# Install: pre-commit install --hook-type pre-push
+
+repos:
+  # Run full test suite
+  - repo: local
+    hooks:
+      - id: pytest-full
+        name: pytest-full
+        entry: uv run pytest
+        language: system
+        args: [tests/, --cov=data_platform_framework, --cov-report=term-missing, --cov-fail-under=80]
+        pass_filenames: false
+        always_run: true
+
+  # Type checking with mypy
+  - repo: local
+    hooks:
+      - id: mypy-full
+        name: mypy-full
+        entry: uv run mypy
+        language: system
+        args: [data_platform_framework/, --strict]
+        pass_filenames: false
+        always_run: true
+
+  # Security audit
+  - repo: local
+    hooks:
+      - id: safety-check
+        name: safety-check
+        entry: uv run safety
+        language: system
+        args: [check, --json]
+        pass_filenames: false
+        always_run: true
+
+  # Dependency check
+  - repo: local
+    hooks:
+      - id: dependency-check
+        name: dependency-check
+        entry: bash
+        language: system
+        args: [-c, 'uv tree']
+        pass_filenames: false
+        always_run: true
+
+  # Build check (commented out - not building packages)
+  # - repo: local
+  #   hooks:
+  #     - id: build-check
+  #       name: build-check
+  #       entry: uv
+  #       language: system
+  #       args: [build]
+  #       pass_filenames: false
+  #       always_run: true
+
+  # Documentation build check
+  - repo: local
+    hooks:
+      - id: docs-check
+        name: docs-check
+        entry: bash
+        language: system
+        args: [-c, 'if [ -f mkdocs.yml ]; then uv run mkdocs build --strict; else echo "No docs to build"; fi']
+        pass_filenames: false
+        always_run: true
+
+# Global configuration
+fail_fast: true
+minimum_pre_commit_version: '3.6.0'

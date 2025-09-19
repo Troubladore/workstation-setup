@@ -1,5 +1,4 @@
-"""
-Layer 2 Datakits Framework - Test Target Configurations
+"""Layer 2 Datakits Framework - Test Target Configurations
 
 Defines standard test database targets for unit testing data objects.
 Supports multiple database types and connection configurations.
@@ -59,8 +58,7 @@ DEFAULT_TARGETS = {
 
 
 def get_target_config(target_name: str) -> dict[str, Any]:
-    """
-    Get configuration for a named test target.
+    """Get configuration for a named test target.
 
     Args:
         target_name: Name of the test target configuration
@@ -79,8 +77,7 @@ def get_target_config(target_name: str) -> dict[str, Any]:
 
 
 def list_available_targets() -> dict[str, str]:
-    """
-    List all available test targets with descriptions.
+    """List all available test targets with descriptions.
 
     Returns:
         Dictionary mapping target names to descriptions
@@ -89,8 +86,7 @@ def list_available_targets() -> dict[str, str]:
 
 
 def create_custom_target(target_type: str, database: str, **kwargs) -> dict[str, Any]:
-    """
-    Create a custom test target configuration.
+    """Create a custom test target configuration.
 
     Args:
         target_type: Database type (postgres, mysql, sqlite)

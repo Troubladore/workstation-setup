@@ -1,5 +1,4 @@
-"""
-SQLite Engine Factory for Layer 2 Datakits Framework
+"""SQLite Engine Factory for Layer 2 Datakits Framework
 
 Provides lightweight SQLite database connections for fast unit testing.
 Ideal for CI/CD environments and rapid data object validation.
@@ -13,8 +12,7 @@ from sqlmodel import create_engine
 
 
 def get_sqlite_file_path(db_name: str, temp_dir: str | None = None) -> str:
-    """
-    Get SQLite file path for test database.
+    """Get SQLite file path for test database.
 
     Args:
         db_name: Database name (will become sqlite_<name>.db)
@@ -35,8 +33,7 @@ def get_sqlite_file_path(db_name: str, temp_dir: str | None = None) -> str:
 
 
 def get_connection_url(db_name: str, in_memory: bool = False, temp_dir: str | None = None) -> str:
-    """
-    Build SQLite connection URL.
+    """Build SQLite connection URL.
 
     Args:
         db_name: Database name
@@ -58,8 +55,7 @@ def get_connection_url(db_name: str, in_memory: bool = False, temp_dir: str | No
 def create_engine_for_test_target(
     database_name: str, engine_config: dict, echo: bool = False
 ) -> Engine:
-    """
-    Create SQLAlchemy engine for a SQLite test database target.
+    """Create SQLAlchemy engine for a SQLite test database target.
 
     Args:
         database_name: Name of the test database
@@ -90,8 +86,7 @@ def get_engine(
     db_name: str = "test",
     in_memory: bool = False,
 ) -> Engine:
-    """
-    Create SQLite engine with direct parameters.
+    """Create SQLite engine with direct parameters.
 
     Args:
         echo_msgs: Whether to echo SQL statements
@@ -107,8 +102,7 @@ def get_engine(
 
 
 def cleanup_test_databases(temp_dir: str | None = None):
-    """
-    Clean up SQLite test database files.
+    """Clean up SQLite test database files.
 
     Args:
         temp_dir: Optional temp directory to clean (cleans default if not provided)

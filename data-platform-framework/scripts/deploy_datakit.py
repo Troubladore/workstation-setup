@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Layer 2 Datakits Framework - Deploy Datakit to Test Target
+"""Layer 2 Datakits Framework - Deploy Datakit to Test Target
 
 CLI tool for deploying datakit data objects to disposable test databases.
 Supports multiple database targets for unit test configurations.

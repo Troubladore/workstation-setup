@@ -70,7 +70,7 @@ Layer 3 orchestrates the validated Layer 2 components and reuses the deployment 
 - **sqlserver-runner:v1.0.0**: Handles SQL Server specific operations
 
 **Framework Reuse**:
-- **layer2-datakits-framework**: Deploy all datakit objects to integration environments
+- **data-platform-framework**: Deploy all datakit objects to integration environments
 - **Multi-database targeting**: Test pipelines against PostgreSQL, MySQL, etc.
 - **Disposable environments**: Create/destroy pipeline testing environments
 
