@@ -1,0 +1,12 @@
+warehouse:
+  name: globex_wh
+  bronze_jobs:
+    - {table: film}
+    - {table: language}
+    - {table: staff}
+    - {table: inventory}
+    - {table: rental}
+  dbt:
+    silver_select: "pagila_silver"
+    dims_select: "gold_mart"
+    facts_select: "gold_rental"

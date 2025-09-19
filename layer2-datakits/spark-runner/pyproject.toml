@@ -1,0 +1,15 @@
+[project]
+name = "datakit-spark"
+version = "0.1.0"
+description = "Spark datakit (bronze ingestion)"
+requires-python = ">=3.11"
+dependencies = [
+  "typer>=0.12,<0.13",
+  "pyspark==3.5.1",
+]
+[project.scripts]
+datakit-spark = "datakit_spark.cli:app"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

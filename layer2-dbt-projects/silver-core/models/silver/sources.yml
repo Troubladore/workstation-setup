@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    tables:
+      - name: br_language
+      - name: br_address
+      - name: br_store
+      - name: br_film
+      - name: br_customer
+      - name: br_staff
+      - name: br_rental
+      - name: br_payment
+      - name: br_inventory

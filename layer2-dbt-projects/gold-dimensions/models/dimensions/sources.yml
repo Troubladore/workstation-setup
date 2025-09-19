@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: silver
+    schema: pagila_silver
+    tables:
+      - name: sl_language
+      - name: sl_address
+      - name: sl_store
+      - name: sl_film
+      - name: sl_staff
+      - name: sl_customer
+      - name: sl_inventory
+      - name: sl_rental_enriched

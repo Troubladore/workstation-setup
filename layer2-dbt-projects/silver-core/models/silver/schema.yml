@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: sl_language
+    columns:
+      - name: language_id
+        tests: [not_null, unique]
+
+  - name: sl_address
+    columns:
+      - name: address_id
+        tests: [not_null, unique]
+
+  - name: sl_store
+    columns:
+      - name: store_id
+        tests: [not_null, unique]
+
+  - name: sl_film
+    columns:
+      - name: film_id
+        tests: [not_null, unique]
+
+  - name: sl_customer
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: email
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['','placeholder']  # replace with real rule or remove
+
+  - name: sl_staff
+    columns:
+      - name: staff_id
+        tests: [not_null, unique]
+
+  - name: sl_inventory
+    columns:
+      - name: inventory_id
+        tests: [not_null, unique]
+
+  - name: sl_rental_enriched
+    columns:
+      - name: rental_id
+        tests: [not_null, unique]
+      - name: film_id
+        tests:
+          - relationships:
+              to: ref('sl_film')
+              field: film_id
+      - name: store_id
+        tests:
+          - relationships:
+              to: ref('sl_store')
+              field: store_id
+      - name: staff_id
+        tests:
+          - relationships:
+              to: ref('sl_staff')
+              field: staff_id

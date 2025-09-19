@@ -1,0 +1,12 @@
+name: 'dbt_silver_core'
+version: '0.1.0'
+config-version: 2
+
+profile: 'pagila'
+
+models:
+  dbt_silver_core:
+    +materialized: table
+    silver:
+      +schema: pagila_silver
+      +tags: ['silver']

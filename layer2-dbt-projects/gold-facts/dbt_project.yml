@@ -1,0 +1,10 @@
+name: 'dbt_gold_rental'
+version: '0.2.0'
+config-version: 2
+profile: 'pagila'
+models:
+  dbt_gold_rental:
+    +materialized: table
+    facts:
+      +schema: gold_rental
+      +tags: ['gold','fact']

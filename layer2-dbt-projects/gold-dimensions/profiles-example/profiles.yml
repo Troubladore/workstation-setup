@@ -1,0 +1,12 @@
+pagila:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: postgres
+      dbname: pagila_wh
+      schema: gold_mart
+      port: 5432
+      threads: 4

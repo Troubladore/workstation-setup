@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: silver
+    schema: pagila_silver
+    tables:
+      - name: sl_rental_enriched
+      - name: sl_film

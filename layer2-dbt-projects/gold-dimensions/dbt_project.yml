@@ -1,0 +1,10 @@
+name: 'dbt_core_dimensions'
+version: '0.2.0'
+config-version: 2
+profile: 'pagila'
+models:
+  dbt_core_dimensions:
+    +materialized: table
+    dimensions:
+      +schema: gold_mart
+      +tags: ['gold','dim']

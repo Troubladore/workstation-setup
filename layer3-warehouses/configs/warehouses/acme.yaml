@@ -1,0 +1,12 @@
+warehouse:
+  name: acme_wh
+  bronze_jobs:
+    - {table: film}
+    - {table: store}
+    - {table: customer}
+    - {table: rental}
+    - {table: payment}
+  dbt:
+    silver_select: "pagila_silver"
+    dims_select: "gold_mart"
+    facts_select: "gold_rental"

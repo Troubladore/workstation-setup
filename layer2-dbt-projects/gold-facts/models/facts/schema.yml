@@ -1,0 +1,11 @@
+version: 2
+models:
+  - name: fact_rental
+    columns:
+      - name: gl_fact_rental_key
+        tests: [not_null, unique]
+      - name: film_key
+        tests:
+          - relationships:
+              to: ref('dim_film')
+              field: gl_dim_film_key
