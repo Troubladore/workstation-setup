@@ -1,0 +1,15 @@
+pools:
+  - pool: default_pool
+    slots: 128
+  - pool: io_heavy
+    slots: 32
+
+queues:
+  - name: default
+  - name: mssql-kerb
+  - name: pg
+  - name: dbt
+  - name: io-heavy
+  - name: compute-heavy
+  - name: validation
+  - name: adhoc

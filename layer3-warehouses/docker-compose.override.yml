@@ -1,0 +1,53 @@
+version: "3.8"
+
+networks:
+  edge:
+    external: true
+  default:
+    name: l3-warehouse-net
+
+volumes:
+  krb_ccache:
+  dbt_profiles:
+
+services:
+  webserver:
+    networks: [default, edge]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.l3-std.rule=Host(`${SUBDOMAIN_STANDARD}`)"
+      - "traefik.http.routers.l3-std.entrypoints=websecure"
+      - "traefik.http.routers.l3-std.tls=true"
+      - "traefik.http.services.l3-std.loadbalancer.server.port=8080"
+
+  scheduler:
+    volumes:
+      - krb_ccache:/krb5cc:rw
+      - dbt_profiles:/app/profiles:rw
+
+  krb-sidecar:
+    image: alpine:3.20
+    command: >
+      sh -c "
+        apk add --no-cache krb5 krb5-libs krb5-conf &&
+        while true; do
+          echo 'Refreshing TGT...' &&
+          kinit -kt $KRB_KEYTAB_PATH $KRB_PRINCIPAL &&
+          cp /tmp/krb5cc_0 /krb5cc/krb5cc &&
+          sleep 3600;
+        done
+      "
+    environment:
+      - KRB_PRINCIPAL=${KRB_PRINCIPAL}
+      - KRB_KEYTAB_PATH=${KRB_KEYTAB_PATH}
+    volumes:
+      - krb_ccache:/krb5cc:rw
+      - ./include:/krb5:ro
+    networks: [default]
+
+  dbt-profiles:
+    image: busybox
+    command: ["sh","-c","tail -f /dev/null"]
+    volumes:
+      - dbt_profiles:/app/profiles
+    networks: [default]
